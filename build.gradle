@@ -1,0 +1,72 @@
+plugins {
+    id 'java-library'
+    id "com.vanniktech.maven.publish" version "0.34.0"
+}
+
+group = 'com.propelauth'
+version = '1.0.3'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Lombok for annotations
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
+    
+    // Jackson for JSON serialization/deserialization
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.19.2'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.19.2'
+    
+    // Testing dependencies
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
+    testImplementation 'org.mockito:mockito-core:5.19.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.19.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// Disable strict javadoc checking for generated code
+javadoc {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.encoding = 'UTF-8'
+    options.charSet = 'UTF-8'
+}
+
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
+}
+
+mavenPublishing {
+    coordinates("com.propelauth", "propelauth-byo", project.version.toString())
+
+    pom {
+        name = 'PropelAuth BYO'
+        description = 'Java client library for PropelAuth Bring Your Own (BYO) authentication.'
+        url = 'https://byo.propelauth.com/'
+        licenses {
+            license {
+                name = 'MIT License'
+                url = 'https://opensource.org/licenses/MIT'
+            }
+        }
+        developers {
+            developer {
+                id = 'propelauth'
+                name = 'PropelAuth'
+                email = 'support@propelauth.com'
+            }
+        }
+    }
+}
