@@ -29,11 +29,11 @@ public abstract class ValidateImpersonationSessionException extends Exception {
     }
     @Getter
     public static class InvalidImpersonationToken extends ValidateImpersonationSessionException {
-        @NonNull @JsonProperty("details") private final InvalidImpersonationTokenError details;
+        @NonNull @JsonProperty("details") private final String details;
         
         
         @JsonCreator
-        public InvalidImpersonationToken(@NonNull @JsonProperty("details") InvalidImpersonationTokenError details) {
+        public InvalidImpersonationToken(@NonNull @JsonProperty("details") String details) {
             super("Invalid impersonation token");
             this.details = details;
         }

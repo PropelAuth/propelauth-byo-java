@@ -34,11 +34,11 @@ public abstract class CreateSessionException extends Exception {
     }
     @Getter
     public static class IpAddressError extends CreateSessionException {
-        @NonNull @JsonProperty("details") private final IpMatchingError details;
+        @NonNull @JsonProperty("details") private final String details;
         
         
         @JsonCreator
-        public IpAddressError(@NonNull @JsonProperty("details") IpMatchingError details) {
+        public IpAddressError(@NonNull @JsonProperty("details") String details) {
             super("IP address error");
             this.details = details;
         }

@@ -24,22 +24,22 @@ public abstract class ValidateSessionException extends Exception {
     
     @Getter
     public static class InvalidSessionToken extends ValidateSessionException {
-        @NonNull @JsonProperty("details") private final InvalidSessionTokenError details;
+        @NonNull @JsonProperty("details") private final String details;
         
         
         @JsonCreator
-        public InvalidSessionToken(@NonNull @JsonProperty("details") InvalidSessionTokenError details) {
+        public InvalidSessionToken(@NonNull @JsonProperty("details") String details) {
             super("Invalid session token");
             this.details = details;
         }
     }
     @Getter
     public static class IpAddressError extends ValidateSessionException {
-        @NonNull @JsonProperty("details") private final IpMatchingError details;
+        @NonNull @JsonProperty("details") private final String details;
         
         
         @JsonCreator
-        public IpAddressError(@NonNull @JsonProperty("details") IpMatchingError details) {
+        public IpAddressError(@NonNull @JsonProperty("details") String details) {
             super("IP address error");
             this.details = details;
         }
